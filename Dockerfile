@@ -9,7 +9,10 @@ RUN go mod download
 
 COPY . .
 
-RUN GOOS=linux go build -o /book-service
+ENV GOOS linux
+ENV CGO_ENABLED 0
+RUN go build -o /book-service
+# RUN CGO_ENABLED=0 GOOS=linux go build -o cmd/book-service
 
 # Run the tests in the container
 # FROM build-stage AS run-test-stage

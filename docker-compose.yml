@@ -3,9 +3,9 @@ version: '3.8'
 services:
   book-service:
     env_file:
-      - ./book-service/.env.local
+      - .env.local
     build:
-      context: ./book-service
+      context: .
     container_name: rest-server
     # Name for app container
     hostname: rest-server

@@ -1,15 +1,24 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
+	// "github.com/joho/godotenv"
 )
 
 func main() {
 	route := gin.Default()
+	// err := godotenv.Load(".env.local")
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
+
 	httpPort := ":" + os.Getenv("HTTP_PORT")
+
+	fmt.Printf("HTTP_PORT -> %v\n", httpPort)
 
 	route.GET("/test", func(ctx *gin.Context) {
 		data := map[string]interface{}{
