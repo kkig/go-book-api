@@ -4,6 +4,9 @@ go 1.20
 
 require github.com/gin-gonic/gin v1.9.0
 
+// replace github.com/kkig/go-book-api => bookApi
+// replace github.com/kkig/go-book-api v1.1.0 => github.com/tidwall/btree v1.1.1-0.20220220161908-7bec22d8e3fa
+
 require (
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect

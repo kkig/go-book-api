@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bookApi/pkg/handlers"
 	"fmt"
 	"net/http"
 	"os"
@@ -28,6 +29,14 @@ func main() {
 		ctx.JSON(http.StatusOK, data)
 		// ctx.JSON(http.StatusOK, gin.H{"data": "Hit!"})
 	})
+
+	v1 := route.Group("/v1")
+	{
+		v1.GET("/books", handlers.GetAllBooks)
+		v1.GET("/ping", func(ctx *gin.Context) {
+			ctx.JSON(200, gin.H{"msg": "pong"})
+		})
+	}
 
 	route.Run(httpPort)
 }
