@@ -63,7 +63,12 @@ func Connect() {
 	fmt.Println("Connected to server!")
 }
 
-func GetAllBooks() ([]Book, error) {
+func Teardown() {
+	migrator := db.Migrator()
+	migrator.DropTable(&Book{})
+}
+
+func Find() ([]Book, error) {
 	var books = []Book{}
 
 	err := db.Find(&books).Error
@@ -72,4 +77,13 @@ func GetAllBooks() ([]Book, error) {
 	}
 
 	return books, nil
+}
+
+func (book *Book) CreateOne() (*Book, error) {
+	err := db.Create(&book).Error
+	if err != nil {
+		return &Book{}, err
+	}
+
+	return book, nil
 }

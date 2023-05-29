@@ -13,4 +13,5 @@ type Book struct {
 type NewBookInput struct {
 	Title		string	`json:"title" binding:"required"`
 	Author		string	`json:"author" binding:"required"`
+	Desc		string	`json:"desc"`
 }
