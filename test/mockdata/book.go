@@ -1,8 +1,8 @@
 package mockdata
 
-import "bookApi/pkg/models"
+import "bookApi/pkg/database"
 
-var Books = []models.Book{
+var Books = []database.Book{
 	{
 		Title: "The quest to 'Go'",
 		Author: "Gopher",

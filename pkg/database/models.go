@@ -1,4 +1,4 @@
-package models
+package database
 
 import "gorm.io/gorm"
 
@@ -6,9 +6,9 @@ import "gorm.io/gorm"
 // ID, CreatedAt, UpdatedAt, DeletedAt
 type Book struct {
 	gorm.Model
-	Title	string	`gorm:"size:255;not null" json:"title"`
-	Author	string	`gorm:"size:255;not null" json:"author"`
-	Desc	string	`gorm:"size:255" json:"desc"`
+	Title	string	`json:"title" gorm:"size:255;not null" `
+	Author	string	`json:"author" gorm:"size:255;not null"`
+	Desc	string	`json:"desc" gorm:"size:255"`
 }
 type NewBookInput struct {
 	Title		string	`json:"title" binding:"required"`

@@ -4,7 +4,6 @@
 package database
 
 import (
-	"bookApi/pkg/models"
 	"fmt"
 	"log"
 	"os"
@@ -15,7 +14,21 @@ import (
 	"gorm.io/gorm/logger"
 )
 
+// GORM defined a gorm.Model struct, which includes fields:
+// ID, CreatedAt, UpdatedAt, DeletedAt
+// type Book struct {
+// 	gorm.Model
+// 	Title	string	`json:"title" gorm:"size:255;not null" `
+// 	Author	string	`json:"author" gorm:"size:255;not null"`
+// 	Desc	string	`json:"desc" gorm:"size:255"`
+// }
+// type NewBookInput struct {
+// 	Title		string	`json:"title" binding:"required"`
+// 	Author		string	`json:"author" binding:"required"`
+// }
+
 var db *gorm.DB
+// var book models.Book
 
 func Connect() {
 	var err error
@@ -44,9 +57,19 @@ func Connect() {
 	if err != nil {
 		panic(err)
 	}
-
-	var book models.Book
-	db.AutoMigrate(&book)
+	// var book models.Book
+	db.AutoMigrate(&Book{})
 
 	fmt.Println("Connected to server!")
+}
+
+func GetAllBooks() ([]Book, error) {
+	var books = []Book{}
+
+	err := db.Find(&books).Error
+	if err != nil {
+		return []Book{}, err
+	}
+
+	return books, nil
 }
