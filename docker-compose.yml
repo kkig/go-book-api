@@ -2,17 +2,45 @@ version: '3.8'
 
 services:
   book-service:
-    env_file:
-      - .env.local
+    env_file: .env
+    depends_on:
+      - db
     build:
       context: .
     container_name: rest-server
     # Name for app container
     hostname: rest-server
+    networks:
+      - booknet
     ports:
       - 80:8080
     environment:
       - HTTP_PORT=${HTTP_PORT:-8080}
+      - PGUSER=${PGUSER:-totoro}
+      - PGPASSWORD=${PGPASSWORD:?database password not set}
+      - PGHOST=${PGHOST:-db}
+      - PGPORT=${PGPORT:-26257}
+      - PGDATABASE=${PGDATABASE:-books}
     deploy:
       restart_policy:
         condition: on-failure
+
+  db:
+    image: cockroachdb/cockroach:latest-v20.1
+    container_name: books
+    hostname: db
+    networks:
+      - booknet
+    ports:
+      - 26257:26257
+      - 8080:8080
+    volumes:
+      - books:/cockroach/cockroach-data
+    command: start-single-node --insecure
+
+volumes:
+  books:
+
+networks:
+  booknet:
+    driver: bridge

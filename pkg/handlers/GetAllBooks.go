@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"bookApi/_test/mockdata"
+	"bookApi/test/mockdata"
 
 	"github.com/gin-gonic/gin"
 )
