@@ -8,8 +8,7 @@ import (
 )
 
 func FindBookById(ctx *gin.Context) {
-	book, err := database.FindBookById(ctx.Param("id"))
-
+	book, err := database.FindOneyId(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return

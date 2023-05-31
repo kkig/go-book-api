@@ -9,8 +9,7 @@ import (
 )
 
 func FindBooks(ctx *gin.Context) {
-	books, err := database.FindBooks()
-
+	books, err := database.Find()
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
 	}

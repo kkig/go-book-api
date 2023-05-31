@@ -18,13 +18,13 @@ func UpdateBookById(ctx *gin.Context) {
 	}
 
 	// Query by id before update
-	book, err := database.FindBookById(ctx.Param("id"))
+	book, err := database.FindOneyId(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	updatedBook, err := book.UpdateBook(&input)
+	updatedBook, err := book.UpdateOne(&input)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

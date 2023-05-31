@@ -3,11 +3,10 @@
 
 package database
 
-func FindBookById(id string) (Book, error) {
+func FindOneyId(id string) (Book, error) {
 	var book Book
 
 	err := db.Where("ID = ?", id).First(&book).Error
-	println(err)
 	if err != nil {
 		return Book{}, err
 	}
@@ -15,7 +14,7 @@ func FindBookById(id string) (Book, error) {
 	return book, nil
 }
 
-func FindBooks() ([]Book, error) {
+func Find() ([]Book, error) {
 	var books []Book
 
 	err := db.Find(&books).Error
@@ -35,7 +34,7 @@ func (book *Book) CreateOne() (*Book, error) {
 	return book, nil
 }
 
-func (book *Book) UpdateBook(input *UpdateBookInput) (*Book, error) {
+func (book *Book) UpdateOne(input *UpdateBookInput) (*Book, error) {
 	err := db.Model(&book).Updates(&input).Error
 	if err != nil {
 		return &Book{}, err
