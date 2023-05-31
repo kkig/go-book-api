@@ -68,7 +68,19 @@ func Teardown() {
 	migrator.DropTable(&Book{})
 }
 
-func Find() ([]Book, error) {
+func FindBookById(id string) (Book, error) {
+	var book = Book{}
+
+	err := db.Where("ID = ?", id).First(&book).Error
+	println(err)
+	if err != nil {
+		return Book{}, err
+	}
+
+	return book, nil
+}
+
+func FindBooks() ([]Book, error) {
 	var books = []Book{}
 
 	err := db.Find(&books).Error

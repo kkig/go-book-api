@@ -30,23 +30,12 @@ func serveApplication() {
 
 	fmt.Printf("HTTP_PORT -> %v\n", httpPort)
 
-	// route.GET("/test", func(ctx *gin.Context) {
-	// 	data := map[string]interface{}{
-	// 		"lang": "Hello语言",
-	// 		"tag": "<br>",
-	// 	}
-	// 	ctx.JSON(http.StatusOK, data)
-	// 	// ctx.JSON(http.StatusOK, gin.H{"data": "Hit!"})
-	// })
-
 	v1 := route.Group("/v1")
 	{
-		v1.GET("/books", handlers.GetAllBooks)
-		v1.POST("/books", handlers.AddBook)
+		v1.GET("/books", handlers.FindBooks)
+		v1.GET("/books/:id", handlers.FindBookById)
 
-		v1.GET("/ping", func(ctx *gin.Context) {
-			ctx.JSON(200, gin.H{"msg": "pong"})
-		})
+		v1.POST("/books", handlers.AddBook)
 	}
 
 	route.Run()

@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllBooks(ctx *gin.Context) {
-	books, err := database.Find()
+func FindBooks(ctx *gin.Context) {
+	books, err := database.FindBooks()
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
