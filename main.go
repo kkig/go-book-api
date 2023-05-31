@@ -38,6 +38,8 @@ func serveApplication() {
 		v1.POST("/books", handlers.AddBook)
 
 		v1.PATCH("/books/:id", handlers.UpdateBookById)
+
+		v1.DELETE("/books/:id", handlers.DeleteBookById)
 	}
 
 	route.Run()

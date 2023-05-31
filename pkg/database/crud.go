@@ -26,6 +26,15 @@ func FindBooks() ([]Book, error) {
 	return books, nil
 }
 
+func (book *Book) CreateOne() (*Book, error) {
+	err := db.Create(&book).Error
+	if err != nil {
+		return &Book{}, err
+	}
+
+	return book, nil
+}
+
 func (input *UpdateBookInput) UpdateBook(id string) (error) {
 	var book Book
 	err := db.Model(&book).Where("ID = ?", id).Updates(&input).Error
@@ -36,11 +45,11 @@ func (input *UpdateBookInput) UpdateBook(id string) (error) {
 	return nil
 }
 
-func (book *Book) CreateOne() (*Book, error) {
-	err := db.Create(&book).Error
+func (book *Book) DeleteOne() (error) {
+	err := db.Delete(&book).Error
 	if err != nil {
-		return &Book{}, err
+		return err
 	}
 
-	return book, nil
+	return nil
 }
