@@ -35,14 +35,13 @@ func (book *Book) CreateOne() (*Book, error) {
 	return book, nil
 }
 
-func (input *UpdateBookInput) UpdateBook(id string) (error) {
-	var book Book
-	err := db.Model(&book).Where("ID = ?", id).Updates(&input).Error
+func (book *Book) UpdateBook(input *UpdateBookInput) (*Book, error) {
+	err := db.Model(&book).Updates(&input).Error
 	if err != nil {
-		return err
+		return &Book{}, err
 	}
 
-	return nil
+	return book, nil
 }
 
 func (book *Book) DeleteOne() (error) {
