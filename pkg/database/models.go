@@ -15,3 +15,9 @@ type NewBookInput struct {
 	Author		string	`json:"author" binding:"required"`
 	Desc		string	`json:"desc"`
 }
+
+type UpdateBookInput struct {
+	Title	string	`json:"title"`
+	Author	string	`json:"author"`
+	Desc	string	`json:"desc"`
+}

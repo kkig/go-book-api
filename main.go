@@ -36,6 +36,8 @@ func serveApplication() {
 		v1.GET("/books/:id", handlers.FindBookById)
 
 		v1.POST("/books", handlers.AddBook)
+
+		v1.PATCH("/books/:id", handlers.UpdateBookById)
 	}
 
 	route.Run()

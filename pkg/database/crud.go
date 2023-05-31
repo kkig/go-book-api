@@ -4,7 +4,7 @@
 package database
 
 func FindBookById(id string) (Book, error) {
-	var book = Book{}
+	var book Book
 
 	err := db.Where("ID = ?", id).First(&book).Error
 	println(err)
@@ -16,7 +16,7 @@ func FindBookById(id string) (Book, error) {
 }
 
 func FindBooks() ([]Book, error) {
-	var books = []Book{}
+	var books []Book
 
 	err := db.Find(&books).Error
 	if err != nil {
@@ -24,6 +24,16 @@ func FindBooks() ([]Book, error) {
 	}
 
 	return books, nil
+}
+
+func (input *UpdateBookInput) UpdateBook(id string) (error) {
+	var book Book
+	err := db.Model(&book).Where("ID = ?", id).Updates(&input).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (book *Book) CreateOne() (*Book, error) {
